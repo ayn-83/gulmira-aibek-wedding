@@ -427,12 +427,13 @@ openBtn.addEventListener('click', async () => {
   // User interaction allows browsers to start audio.
   try {
     music.volume = 0.55;
-    await music.play();
-    musicBtn.textContent = '🔊';
-  } catch(e) {
-    musicBtn.textContent = '🔇';
-  }
-  musicBtn.classList.remove('hidden');
+music.play().then(() => {
+  musicBtn.textContent = '🔊';
+}).catch(() => {
+  musicBtn.textContent = '🔇';
+});
+
+musicBtn.classList.remove('hidden');
 
   setTimeout(() => {
     opening.classList.add('hide');
