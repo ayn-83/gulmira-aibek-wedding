@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f8f3ee">
+<meta name="description" content="Гүлмира & Айбек — үйлөнүү үлпөт тоюна чакыруу">
+<title>Гүлмира & Айбек | Wedding Invitation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root{
+  --gold:#b89558;
+  --gold2:#e0c78f;
+  --cream:#faf5ef;
+  --ink:#5a4a3b;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#f7f1ea;
+  color:var(--ink);
+  font-family:Montserrat,Arial,sans-serif;
+  overflow-x:hidden;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+/* ---------- INTRO / ENVELOPE ---------- */
+#opening{
+  position:fixed; inset:0; z-index:9999;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,255,255,.95),rgba(245,236,225,.98) 65%,#e9dccd);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  transition:opacity .9s ease,visibility .9s ease;
+}
+#opening.hide{opacity:0;visibility:hidden;pointer-events:none}
+
+.envelope-wrap{
+  width:min(88vw,390px);
+  text-align:center;
+  perspective:1000px;
+}
+.envelope{
+  position:relative;
+  width:100%; aspect-ratio:1.48;
+  margin:0 auto 26px;
+  filter:drop-shadow(0 20px 28px rgba(93,67,39,.18));
+  transform-style:preserve-3d;
+}
+.env-body{
+  position:absolute; inset:0;
+  background:linear-gradient(145deg,#fffdf9,#eadccf);
+  border:1px solid rgba(184,149,88,.5);
+  border-radius:8px;
+  overflow:hidden;
+}
+.env-body:before,.env-body:after{
+  content:"";position:absolute;bottom:-4%;width:74%;height:70%;
+  background:linear-gradient(135deg,#f5eadf,#fffdfa);
+  border:1px solid rgba(184,149,88,.25);
+}
+.env-body:before{left:-28%;transform:rotate(31deg)}
+.env-body:after{right:-28%;transform:rotate(-31deg)}
+.flap{
+  position:absolute;left:0;top:0;width:100%;height:64%;
+  background:linear-gradient(145deg,#fffdfa,#e9d8c9);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;
+  border-top:1px solid rgba(184,149,88,.35);
+  z-index:4;
+  transition:transform 1.2s cubic-bezier(.2,.75,.2,1);
+}
+.seal{
+  position:absolute;z-index:6;left:50%;top:44%;
+  transform:translate(-50%,-50%);
+  width:62px;height:62px;border-radius:50%;
+  background:radial-gradient(circle,#f4ddb0,#b89558 70%);
+  box-shadow:0 6px 18px rgba(116,82,35,.25);
+  display:grid;place-items:center;color:#fff;font-size:26px;
+  transition:opacity .45s ease,transform .45s ease;
+}
+.envelope.open .flap{transform:rotateX(180deg)}
+.envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+.envelope.open{animation:envOut 1.3s .45s forwards}
+@keyframes envOut{to{transform:translateY(35px) scale(.92);opacity:0}}
+.open-btn{
+  border:1px solid var(--gold); background:rgba(255,255,255,.7);
+  color:#8b6b39; padding:13px 25px; border-radius:999px;
+  letter-spacing:.08em; font-size:12px; font-weight:600;
+  box-shadow:0 8px 20px rgba(130,94,47,.12);
+  backdrop-filter:blur(8px);
+}
+.open-btn:active{transform:scale(.98)}
+.opening-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(28px,8vw,44px);
+  letter-spacing:.08em;margin:0 0 7px;color:#8e6e40;
+}
+.opening-sub{font-size:11px;letter-spacing:.2em;color:#9b8975}
+
+/* ---------- OPENING ANIMATION ---------- */
+#roseIntro{
+  position:fixed;inset:0;z-index:9998;background:#120b09;
+  opacity:0;visibility:hidden;transition:opacity .6s ease;
+}
+#roseIntro.show{opacity:1;visibility:visible}
+#roseIntro video{width:100%;height:100%;object-fit:cover}
+.rose-overlay{
+  position:absolute;inset:auto 20px 40px;text-align:center;color:white;
+  text-shadow:0 2px 12px #000;font-family:"Cormorant Garamond",serif;
+  font-size:28px;letter-spacing:.08em;
+}
+
+/* ---------- SITE ---------- */
+#site{opacity:0;transition:opacity .8s ease}
+#site.visible{opacity:1}
+.section{
+  min-height:100svh; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  padding:72px 18px;
+  background-size:cover;background-position:center;
+}
+.section:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,252,248,.15),rgba(255,250,245,.18));
+}
+.section.dark-text:before{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.32))}
+.content{
+  position:relative;z-index:2;width:min(92vw,620px);
+  text-align:center;
+}
+.card{
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(184,149,88,.38);
+  box-shadow:0 18px 50px rgba(77,55,35,.10);
+  backdrop-filter:blur(5px);
+  border-radius:24px;
+  padding:30px 22px;
+}
+.kicker{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:#9b7b48;margin-bottom:12px
+}
+h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:600}
+.hero-names{
+  font-size:clamp(50px,14vw,82px);line-height:.86;
+  color:#8e6e40;margin:8px 0 18px;letter-spacing:.03em;
+}
+.amp{font-size:.6em;color:#b89558}
+.lead{font-family:"Cormorant Garamond",serif;font-size:24px;line-height:1.2}
+.small{font-size:12px;line-height:1.7;color:#786858}
+.divider{width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px auto}
+.gold-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--gold);border-radius:999px;
+  background:rgba(255,255,255,.82);color:#7f6034;
+  padding:12px 19px;text-decoration:none;font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.info-grid{display:grid;gap:13px}
+.info-box{
+  padding:18px;border-radius:18px;
+  background:rgba(255,255,255,.64);
+  border:1px solid rgba(184,149,88,.28);
+}
+.info-box strong{display:block;font-family:"Cormorant Garamond",serif;font-size:28px;color:#86663b}
+.date-big{font-family:"Cormorant Garamond",serif;font-size:54px;color:#8e6e40;line-height:1}
+.date-sub{font-size:13px;letter-spacing:.18em;margin-top:10px}
+.location-name{font-family:"Cormorant Garamond",serif;font-size:38px;color:#8e6e40}
+.map-btn{margin-top:14px}
+.countdown{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px
+}
+.time{
+  background:rgba(255,255,255,.7);border:1px solid rgba(184,149,88,.28);
+  border-radius:15px;padding:14px 5px;
+}
+.time b{font-family:"Cormorant Garamond",serif;font-size:34px;color:#8b6a3d;display:block}
+.time span{font-size:8px;letter-spacing:.08em;text-transform:uppercase}
+.program{list-style:none;padding:0;margin:18px 0;text-align:left}
+.program li{display:flex;gap:15px;padding:13px 0;border-bottom:1px solid rgba(184,149,88,.22)}
+.program time{min-width:55px;color:#9a7845;font-weight:600;font-size:12px}
+.program span{font-family:"Cormorant Garamond",serif;font-size:20px}
+.rsvp form{display:grid;gap:11px;text-align:left}
+.rsvp label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8b7765}
+.rsvp input,.rsvp select{
+  width:100%;border:1px solid rgba(184,149,88,.35);
+  border-radius:13px;background:rgba(255,255,255,.82);
+  padding:13px;color:#5b4a3b;outline:none;
+}
+.choice{display:grid;gap:8px}
+.choice label{
+  text-transform:none;letter-spacing:0;font-size:12px;
+  display:flex;align-items:center;gap:8px;
+  padding:11px;border:1px solid rgba(184,149,88,.25);
+  border-radius:12px;background:rgba(255,255,255,.6);
+}
+.submit{width:100%;border:none;background:linear-gradient(135deg,#b89558,#d8bd82);color:#fff}
+.wa-note{font-size:10px;text-align:center;color:#8d7a68;margin-top:8px}
+.music{
+  position:fixed;right:14px;top:14px;z-index:500;
+  border:1px solid rgba(184,149,88,.5);background:rgba(255,255,255,.75);
+  backdrop-filter:blur(10px);color:#7f6034;
+  width:44px;height:44px;border-radius:50%;font-size:18px;
+  box-shadow:0 8px 22px rgba(75,54,31,.12)
+}
+.final{
+  min-height:100svh;padding:0;background:#100c0b;
+}
+.final video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.final:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.38))}
+.final-content{position:relative;z-index:2;color:#fff;text-align:center}
+.final-content h2{font-size:54px;margin:0;text-shadow:0 2px 18px #000}
+.footer-note{margin-top:8px;font-size:11px;letter-spacing:.12em}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (min-width:700px){
+  .section{padding:100px 30px}
+  .card{padding:42px}
+  .info-grid{grid-template-columns:1fr 1fr}
+  .rsvp .card{max-width:520px;margin:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- FIRST SCREEN -->
+<div id="opening">
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope">
+      <div class="env-body"></div>
+      <div class="flap"></div>
+      <div class="seal">♡</div>
+    </div>
+    <h1 class="opening-title">Гүлмира <span class="amp">&</span> Айбек</h1>
+    <div class="opening-sub">СҮЙҮҮ • БАКЫТ • ҮЙ-БҮЛӨ</div>
+    <div style="height:18px"></div>
+    <button class="open-btn" id="openBtn">ЧАКЫРУУ КАТЫН АЧУУ</button>
+  </div>
+</div>
+
+<!-- ROSE / ENVELOPE ANIMATION -->
+<div id="roseIntro">
+  <video id="roseVideo" playsinline muted preload="auto">
+    <source src="rose-envelope.mp4" type="video/mp4">
+  </video>
+  <div class="rose-overlay">Биздин өзгөчө күнгө кош келиңиздер</div>
+</div>
+
+<button class="music hidden" id="musicBtn" aria-label="Музыка">🔇</button>
+<audio id="music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<main id="site">
+
+  <!-- INTRO -->
+  <section class="section" style="background-image:url('intro.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">Үйлөнүү үлпөт тою</div>
+        <div class="hero-names">Гүлмира <span class="amp">&</span> Айбек</div>
+        <div class="divider"></div>
+        <div class="lead">Сүйүүбүздүн эң бактылуу күнүн сиздер менен бирге белгилегибиз келет.</div>
+        <p class="small">Сиздерди биздин кубанычтуу күнүбүзгө чын жүрөктөн чакырабыз.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVITATION -->
+  <section class="section" style="background-image:url('bg-01.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">Чакыруу</div>
+        <h2 style="font-size:42px;margin:5px 0 15px">Урматтуу туугандар, достор жана жакындарыбыз!</h2>
+        <p class="lead" style="font-size:22px">
+          Сиздерди биздин кубанычтуу күнүбүзгө — <b>үйлөнүү үлпөт тоюбузга</b> чын жүрөктөн чакырабыз.
+        </p>
+        <p class="lead" style="font-size:22px">Кубанычыбызды сиздер менен бөлүшүүгө кубанычтабыз! 🤍</p>
+        <div class="divider"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px">Гүлмира & Айбек</div>
+        <div class="small">Той ээлери: Мамат & Сайра</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATE -->
+  <section class="section" style="background-image:url('bg-02.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">Той күнү</div>
+        <div class="date-big">22.12.2026</div>
+        <div class="date-sub">ШЕЙШЕМБИ • 19:00</div>
+        <div class="divider"></div>
+        <div class="lead">Бул күн биздин жашообуздагы жаңы барактын башталышы.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="section" style="background-image:url('bg-03.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">Той өтүүчү жер</div>
+        <div class="location-name">«Алтын Казына»</div>
+        <p class="lead" style="font-size:22px">Бишкек шаары<br>Жибек жолу 74</p>
+        <a class="gold-btn map-btn"
+           href="https://www.google.com/maps/search/?api=1&query=%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA%2C%20%D0%96%D0%B8%D0%B1%D0%B5%D0%BA%20%D0%B6%D0%BE%D0%BB%D1%83%2074"
+           target="_blank" rel="noopener">КАРТАДАН КӨРҮҮ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="section" style="background-image:url('bg-04.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">Биздин өзгөчө күн</div>
+        <h2 style="font-size:48px;margin:0">Тойго чейин</h2>
+        <div class="countdown">
+          <div class="time"><b id="days">0</b><span>күн</span></div>
+          <div class="time"><b id="hours">0</b><span>саат</span></div>
+          <div class="time"><b id="mins">0</b><span>мүнөт</span></div>
+          <div class="time"><b id="secs">0</b><span>секунд</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section class="section" style="background-image:url('bg-05.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">Кеченин жүрүшү</div>
+        <h2 style="font-size:48px;margin:0">Тойдун программасы</h2>
+        <ul class="program">
+          <li><time>19:00</time><span>Конокторду тосуп алуу</span></li>
+          <li><time>19:30</time><span>Тойдун башталышы</span></li>
+          <li><time>20:00</time><span>Банкет жана майрамдык кече</span></li>
+        </ul>
+        <p class="small">* Программа убакытка жараша өзгөрүшү мүмкүн.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section rsvp" style="background-image:url('bg-06.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">RSVP</div>
+        <h2 style="font-size:50px;margin:0 0 8px">Тойго келесизби?</h2>
+        <p class="small">Жообуңузду WhatsApp аркылуу той ээлерине жөнөтө аласыз.</p>
+
+        <form id="rsvpForm">
+          <div>
+            <label for="guestName">Атыңыз</label>
+            <input id="guestName" required placeholder="Атыңызды жазыңыз">
+          </div>
+
+          <div>
+            <label for="guestCount">Канча киши болуп келесиз?</label>
+            <select id="guestCount" required>
+              <option value="">Тандаңыз</option>
+              <option>1 адам</option><option>2 адам</option><option>3 адам</option>
+              <option>4 адам</option><option>5 адам</option><option>6 адам</option>
+              <option>7 адам</option><option>8 адам</option><option>9 адам</option>
+              <option>10 адам</option>
+            </select>
+          </div>
+
+          <div class="choice">
+            <label><input type="radio" name="attendance" value="Ооба, сөзсүз келем" checked> 🟢 Ооба, сөзсүз келем</label>
+            <label><input type="radio" name="attendance" value="Тилекке каршы, келе албайм"> ⚪ Тилекке каршы, келе албайм</label>
+          </div>
+
+          <button class="gold-btn submit" type="submit">WHATSAPP АРКЫЛУУ ЖӨНӨТҮҮ</button>
+          <div class="wa-note">+996 557 166 799 • Мамат & Сайра</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTIONAL LOVE/PHOTO -->
+  <section class="section" style="background-image:url('bg-07.jpg')">
+    <div class="content reveal">
+      <div class="card">
+        <div class="kicker">Биздин бакыт</div>
+        <h2 style="font-size:52px;margin:0">Гүлмира & Айбек</h2>
+        <p class="lead">Сиздердин катышууңуздар бул күндү биз үчүн дагы да өзгөчө кылат.</p>
+        <div class="divider"></div>
+        <p class="small">Сиздерди чыдамсыздык менен күтөбүз 🤍</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL ANIMATION -->
+  <section class="section final">
+    <video autoplay muted playsinline loop preload="metadata">
+      <source src="final-dance.mp4" type="video/mp4">
+    </video>
+    <div class="final-content reveal">
+      <h2>Гүлмира & Айбек</h2>
+      <div class="footer-note">БИЗДИН БАХТЫБЫЗДЫ БӨЛҮШКӨНҮҢҮЗДӨР ҮЧҮН РАХМАТ 🤍</div>
+    </div>
+  </section>
+</main>
+
+<script>
+const opening = document.getElementById('opening');
+const envelope = document.getElementById('envelope');
+const openBtn = document.getElementById('openBtn');
+const roseIntro = document.getElementById('roseIntro');
+const roseVideo = document.getElementById('roseVideo');
+const site = document.getElementById('site');
+const music = document.getElementById('music');
+const musicBtn = document.getElementById('musicBtn');
+
+openBtn.addEventListener('click', async () => {
+  envelope.classList.add('open');
+
+  // User interaction allows browsers to start audio.
+  try {
+    music.volume = 0.55;
+    await music.play();
+    musicBtn.textContent = '🔊';
+  } catch(e) {
+    musicBtn.textContent = '🔇';
+  }
+  musicBtn.classList.remove('hidden');
+
+  setTimeout(() => {
+    opening.classList.add('hide');
+    roseIntro.classList.add('show');
+    roseVideo.currentTime = 0;
+    roseVideo.play().catch(()=>{});
+  }, 900);
+
+  roseVideo.onended = () => {
+    roseIntro.classList.remove('show');
+    site.classList.add('visible');
+    document.body.style.overflow = '';
+    window.scrollTo({top:0,behavior:'instant'});
+  };
+});
+
+musicBtn.addEventListener('click', async () => {
+  if (music.paused) {
+    try { await music.play(); musicBtn.textContent='🔊'; } catch(e) {}
+  } else {
+    music.pause();
+    musicBtn.textContent='🔇';
+  }
+});
+
+// Countdown: 22 December 2026, 19:00 local browser time.
+const target = new Date(2026, 11, 22, 19, 0, 0);
+function updateCountdown(){
+  let diff = target - new Date();
+  if(diff < 0) diff = 0;
+  const sec = Math.floor(diff/1000);
+  const d = Math.floor(sec/86400);
+  const h = Math.floor((sec%86400)/3600);
+  const m = Math.floor((sec%3600)/60);
+  const s = sec%60;
+  document.getElementById('days').textContent=d;
+  document.getElementById('hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('secs').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+// RSVP -> WhatsApp
+document.getElementById('rsvpForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('guestName').value.trim();
+  const count = document.getElementById('guestCount').value;
+  const attendance = document.querySelector('input[name="attendance"]:checked').value;
+  const message =
+`Саламатсызбы!%0A%0AГүлмира & Айбектин үйлөнүү тою боюнча жооп:%0A%0A` +
+`Аты-жөнү: ${encodeURIComponent(name)}%0A` +
+`Келүүчү адамдардын саны: ${encodeURIComponent(count)}%0A` +
+`Жооп: ${encodeURIComponent(attendance)}%0A%0A` +
+`22.12.2026, саат 19:00`;
+  window.open('https://wa.me/996557166799?text=' + message, '_blank', 'noopener');
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('in');
+  });
+},{threshold:.16});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
