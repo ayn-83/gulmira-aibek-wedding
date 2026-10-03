@@ -472,17 +472,28 @@ setInterval(updateCountdown,1000);
 // RSVP -> WhatsApp
 document.getElementById('rsvpForm').addEventListener('submit', e => {
   e.preventDefault();
+
   const name = document.getElementById('guestName').value.trim();
   const count = document.getElementById('guestCount').value;
   const attendance = document.querySelector('input[name="attendance"]:checked').value;
+
   const message =
-`Саламатсызбы!%0A%0AГүлмира & Айбектин үйлөнүү тою боюнча жооп:%0A%0A` +
-`Аты-жөнү: ${encodeURIComponent(name)}%0A` +
-`Келүүчү адамдардын саны: ${encodeURIComponent(count)}%0A` +
-`Жооп: ${encodeURIComponent(attendance)}%0A%0A` +
-`22.12.2026, саат 19:00`;
-  window.open('https://wa.me/996557166799?text=' + message, '_blank', 'noopener');
+`Саламатсызбы!
+
+Гүлмира & Айбектин үйлөнүү тою боюнча жооп:
+
+Аты-жөнү: ${name}
+Келүүчү адамдардын саны: ${count}
+Жооп: ${attendance}
+
+22.12.2026, саат 19:00`;
+
+  const whatsappUrl =
+    'https://wa.me/996557166799?text=' + encodeURIComponent(message);
+
+  window.open(whatsappUrl, '_blank');
 });
+
 
 // Scroll reveal
 const observer = new IntersectionObserver(entries => {
