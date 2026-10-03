@@ -420,33 +420,25 @@ const roseVideo = document.getElementById('roseVideo');
 const site = document.getElementById('site');
 const music = document.getElementById('music');
 const musicBtn = document.getElementById('musicBtn');
-
-openBtn.addEventListener('click', async () => {
+openBtn.addEventListener('click', () => {
   envelope.classList.add('open');
-
-  // User interaction allows browsers to start audio.
-  try {
-    music.volume = 0.55;
-music.play().then(() => {
-  musicBtn.textContent = '🔊';
-}).catch(() => {
-  musicBtn.textContent = '🔇';
-});
-
-musicBtn.classList.remove('hidden');
 
   setTimeout(() => {
     opening.classList.add('hide');
     roseIntro.classList.add('show');
+
     roseVideo.currentTime = 0;
-    roseVideo.play().catch(()=>{});
+    roseVideo.play().catch(() => {});
+
+    musicBtn.classList.remove('hidden');
+    music.play().catch(() => {});
   }, 900);
 
   roseVideo.onended = () => {
     roseIntro.classList.remove('show');
     site.classList.add('visible');
     document.body.style.overflow = '';
-    window.scrollTo({top:0,behavior:'instant'});
+    window.scrollTo(0, 0);
   };
 });
 
